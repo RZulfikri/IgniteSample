@@ -31,7 +31,7 @@ export default StyleSheet.create({
     justifyContent: 'space-between'
   },
   containerProgressBar: {
-
+    flexDirection: 'row'
   },
   containerAction: {
     flexDirection: 'row',
@@ -71,9 +71,14 @@ export default StyleSheet.create({
     flexDirection: 'row'
   },
 
-  progressBar: {
+  progressBarNotFill: {
     height: 2,
     flex: 1,
     backgroundColor: 'gray'
+  },
+  progressBarFill: {
+    height: 2,
+    flex: 1,
+    backgroundColor: 'blue'
   }
 })

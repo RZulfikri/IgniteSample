@@ -13,7 +13,8 @@ class MusicScreen extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      music: []
+      music: [],
+      currentTime: 0
     }
   }
 
@@ -28,7 +29,7 @@ class MusicScreen extends Component {
   componentWillReceiveProps (nextProps) {
     if (nextProps.music.payload) {
       Reactotron.log(nextProps.music.payload)
-      this.setState({music: nextProps.music.payload})
+      this.setState({music: nextProps.music.payload, currentTime: 300})
     }
   }
 
@@ -46,6 +47,10 @@ class MusicScreen extends Component {
     return minute + ':' + second
   }
 
+  getProgressDuration (time) {
+    return (time / this.state.music.duration)
+  }
+
   render () {
     return (
       <ScrollView style={styles.container} contentContainerStyle={{flexGrow: 1}}>
@@ -60,11 +65,12 @@ class MusicScreen extends Component {
         </View>
         <View style={styles.containerProgress}>
           <View style={styles.containerProgressTime}>
-            <Text>{this.getTime(0)}</Text>
-            <Text>{this.getTime(this.state.music.duration || 0)}</Text>
+            <Text>{this.getTime(this.state.currentTime)}</Text>
+            <Text>{this.getTime(this.state.music.duration || this.state.currentTime)}</Text>
           </View>
           <View style={styles.containerProgressBar}>
-            <View style={styles.progressBar} />
+            <View style={[styles.progressBarFill, {flex: this.getProgressDuration(this.state.currentTime) }]} />
+            <View style={[styles.progressBarNotFill, {flex: 1 - this.getProgressDuration(this.state.currentTime) }]} />
           </View>
         </View>
         <View style={styles.containerAction}>
