@@ -5,14 +5,14 @@ import DebugConfig from '../Config/DebugConfig'
 
 /* ------------- Types ------------- */
 
-import { StartupTypes } from '../Redux/StartupRedux'
-import { GithubTypes } from '../Redux/GithubRedux'
-
+// import { StartupTypes } from '../Redux/StartupRedux'
+// import { GithubTypes } from '../Redux/GithubRedux'
+import { MusicTypes } from '../Redux/MusicRedux'
 /* ------------- Sagas ------------- */
 
-import { startup } from './StartupSagas'
-import { getUserAvatar } from './GithubSagas'
-
+// import { startup } from './StartupSagas'
+// import { getUserAvatar } from './GithubSagas'
+import { getMusic } from './MusicSagas'
 /* ------------- API ------------- */
 
 // The API we use is only used from Sagas, so we create it here and pass along
@@ -24,9 +24,11 @@ const api = DebugConfig.useFixtures ? FixtureAPI : API.create()
 export default function * root () {
   yield [
     // some sagas only receive an action
-    takeLatest(StartupTypes.STARTUP, startup),
+    // takeLatest(StartupTypes.STARTUP, startup),
 
     // some sagas receive extra parameters in addition to an action
-    takeLatest(GithubTypes.USER_REQUEST, getUserAvatar, api)
+    // takeLatest(GithubTypes.USER_REQUEST, getUserAvatar, api)
+
+    takeLatest(MusicTypes.GET_MUSIC_REQUEST, getMusic, api)
   ]
 }
