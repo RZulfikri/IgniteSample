@@ -1,0 +1,3 @@
+rootProject.name = 'IgniteSample'
+
+include ':app'
